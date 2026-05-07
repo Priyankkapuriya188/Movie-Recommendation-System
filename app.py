@@ -22,8 +22,14 @@ st.markdown("<h1 style='text-align: center; color: #E50914;'>🎬 Movie Matcher<
 st.write("---") 
 
 @st.cache_data
+# def load_data():
+#     return pickle.load(open('df.pkl', 'rb')), pickle.load(open('indices.pkl', 'rb')), pickle.load(open('tfidfMatrix.pkl', 'rb'))
 def load_data():
-    return pickle.load(open('df.pkl', 'rb')), pickle.load(open('indices.pkl', 'rb')), pickle.load(open('tfidfMatrix.pkl', 'rb'))
+    # Use pandas to read the compressed file
+    df = pd.read_pickle('df.pkl.gz')
+    indices = pickle.load(open('indices.pkl', 'rb'))
+    tfidf_matrix = pickle.load(open('tfidfMatrix.pkl', 'rb'))
+    return df, indices, tfidf_matrix
 
 df, indices, tfidf_matrix = load_data()
 
