@@ -51,8 +51,11 @@ if st.button('Get Recommendations'):
         
         cols = st.columns(5)
         for col, i in zip(cols, top_indices):
-            title = df['title'].iloc[i]
-            overview = df['overview'].iloc[i]
+            try:
+                title = df['title'].iloc[i]
+                overview = df['overview'].iloc[i]
+            except IndexError:
+                continue
             
             if pd.isna(overview) or str(overview).strip() == "" or str(overview).lower() == "nan":
                 overview = "Plot overview is currently not available for this movie."
